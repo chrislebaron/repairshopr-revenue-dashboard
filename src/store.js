@@ -37,7 +37,7 @@ export default new Vuex.Store({
             console.log('paymentInfo', paymentInfo);
             context.commit('setPayments', paymentInfo.payments);
             numPages = paymentInfo.meta.total_pages;
-            // numPages = 10, // TODO REMOVE ME
+            numPages = 10, // TODO REMOVE ME
             pageNum += 1;
 
             console.log('got page', pageNum, 'of', numPages, ' -- ', paymentInfo);

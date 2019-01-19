@@ -6,6 +6,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueCurrencyFilter from 'vue-currency-filter'
+import VueGoogleCharts from 'vue-google-charts'
 
 
 Vue.config.productionTip = false;
@@ -19,6 +20,7 @@ Vue.use(VueCurrencyFilter,
       symbolPosition: 'front',
       symbolSpacing: false
     })
+Vue.use(VueGoogleCharts);
 
 new Vue({
   router,
