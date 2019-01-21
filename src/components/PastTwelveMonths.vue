@@ -1,18 +1,17 @@
 <template>
-    <div class="col-12">
-        <div class="card border-info">
-            <div class="card-header text-white bg-info">
-                <h5>Past 12 months Revenue</h5>
-            </div>
-            <div class="card-body">
-                <GChart
-                        type="BarChart"
-                        :data="chartData"
-                        :options="chartOptions"
-                />
-            </div>
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <h5>Past 12 months Revenue</h5>
+        </div>
+        <div class="card-body">
+            <GChart
+                    type="BarChart"
+                    :data="chartData"
+                    :options="chartOptions"
+            />
         </div>
     </div>
+
 </template>
 
 <script>

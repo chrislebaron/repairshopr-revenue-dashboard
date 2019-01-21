@@ -1,26 +1,24 @@
 <template>
-    <div class="col-12">
-        <div class="card border-info">
-            <div class="card-header text-white bg-info">
-                <h5>
-                    {{ startOfMonth.format("MMM YYYY")}} Vs. {{ startOfLastMonth.clone().subtract(1, 'months').format("MMM YYYY")}}
-                </h5>
+    <div class="card border-info">
+        <div class="card-header text-white bg-info">
+            <h5>
+                {{ startOfMonth.format("MMM YYYY")}} Vs. {{ startOfLastMonth.clone().subtract(1, 'months').format("MMM YYYY")}}
+            </h5>
 
-            </div>
-            <div class="card-body">
-                <!--<p>This Month To Date: {{ $store.getters.getTotal({startDate: startOfMonth, endDate: endOfMonth}) | currency }}</p>-->
-                <!--<p>To This Date Last Month: {{ $store.getters.getTotal({startDate: startOfLastMonth, endDate: toThisDateLastMonth }) | currency }}</p>-->
-                <!--<p>Total Last Month: {{ $store.getters.getTotal({startDate: startOfLastMonth, endDate: endOfLastMonth}) | currency }}</p>-->
-
-                <GChart
-                        type="ColumnChart"
-                        :data="chartData"
-                        :options="chartOptions"
-                />
-            </div>
         </div>
+        <div class="card-body">
+            <!--<p>This Month To Date: {{ $store.getters.getTotal({startDate: startOfMonth, endDate: endOfMonth}) | currency }}</p>-->
+            <!--<p>To This Date Last Month: {{ $store.getters.getTotal({startDate: startOfLastMonth, endDate: toThisDateLastMonth }) | currency }}</p>-->
+            <!--<p>Total Last Month: {{ $store.getters.getTotal({startDate: startOfLastMonth, endDate: endOfLastMonth}) | currency }}</p>-->
 
+            <GChart
+                    type="ColumnChart"
+                    :data="chartData"
+                    :options="chartOptions"
+            />
+        </div>
     </div>
+
 </template>
 
 <script>
