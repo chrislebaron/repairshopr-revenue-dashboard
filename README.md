@@ -2,7 +2,7 @@
 
 A simple Vue.js app for viewing business statistics from the RepairShopr API.
 
-Note -- Don't ever deploy this to an internet based server. This would expose your API key and business statistics to anyone who knows how to view the source of the page.
+Note -- Don't ever deploy this to an internet based server. This would expose your API key and business statistics to anyone who knows how to view the source of the page. Run this locally on the computer you want to view the stats on.
 
 ## Project setup
 Make sure you have Node and NPM installed.
