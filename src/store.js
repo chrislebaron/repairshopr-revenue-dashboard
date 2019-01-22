@@ -7,18 +7,32 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    payments: []
+    payments: [],
+    pageNumber: 0,
+    totalPages: 0
   },
   mutations: {
     setPayments(state, newPayments) {
-      state.payments.push(...newPayments);
+      for(let newPayment of newPayments) {
+        if (!state.payments.find(payment => payment.id === newPayment.id)){
+          state.payments.push(newPayment);
+        }
+      }
+    },
+    setPageNumber(state, pageNumber) {
+      state.pageNumber = pageNumber;
+    },
+    setTotalPages(state, pages) {
+      state.totalPages = pages;
     }
+
   },
   actions: {
     fetchPaymentPage(context, pageNum){
       return new Promise(async (resolve, reject) => {
+        const apiKey = process.env.VUE_APP_API_KEY;
         if(!pageNum) pageNum = 1;
-        const response = await axios.get(`https://gbllc.repairshopr.com/api/v1/payments?api_key=cb03a398-5c4b-485c-a762-a23afcdfec4b&page=${pageNum}`);
+        const response = await axios.get(`https://gbllc.repairshopr.com/api/v1/payments?api_key=${apiKey}&page=${pageNum}`);
         if(response.status == 200) {
           resolve(response.data);
         }else {
@@ -41,6 +55,8 @@ export default new Vuex.Store({
             pageNum += 1;
 
             console.log('got page', pageNum, 'of', numPages, ' -- ', paymentInfo);
+            context.commit('setPageNumber', pageNum);
+            context.commit('setTotalPages', numPages);
           }
 
           resolve(context.state)
@@ -48,6 +64,12 @@ export default new Vuex.Store({
           reject(e);
         }
 
+      })
+    },
+    fetchLatestPage: (context) => {
+      return new Promise(async(resolve, reject) => {
+        let paymentInfo = await context.dispatch('fetchPaymentPage', 1);
+        context.commit('setPayments', paymentInfo.payments);
       })
     }
   },
@@ -74,6 +96,12 @@ export default new Vuex.Store({
         return total;
       }
 
+    },
+    getPageNumber: state => {
+      return state.pageNumber;
+    },
+    getTotalPages: state => {
+      return state.totalPages;
     }
   }
 })

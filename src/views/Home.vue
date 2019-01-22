@@ -49,7 +49,7 @@ export default {
   computed: {
     ...mapGetters({
       allPayments: 'getAllPayments',
-      totalEver: 'getTotal'
+      totalEver: 'getTotal',
     }),
     // totalThisMonth: this.$store.getters.getTotal({
     //   startDate: moment().startOf('month'),
@@ -60,6 +60,13 @@ export default {
     try {
       await this.$store.dispatch('fetchPayments');
       this.loading = false;
+
+      setInterval(async () => {
+        console.log('starting interval to check for new data');
+        await this.$store.dispatch('fetchLatestPage');
+      }, 300000)
+
+
     }catch (e) {
       console.error(e);
       alert('e')
@@ -69,3 +76,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .home {
+    margin-top: 20px;
+  }
+</style>
